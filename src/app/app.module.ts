@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialExampleModule } from '../material.module';
+import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayerComponent } from './player-component/player.component';
 import { TeamPlayerComponent } from './team-player-component/team-player.component';
 import { AppComponent } from './app.component';
+import { TeamListComponent } from './team-list/team-list.component';
 
 @NgModule({
-  declarations: [AppComponent, PlayerComponent, TeamPlayerComponent],
+  declarations: [AppComponent, PlayerComponent, TeamPlayerComponent, TeamListComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     MatNativeDateModule,
-    MaterialExampleModule,
+    MaterialModule,
     ReactiveFormsModule,
   ],
   exports: [PlayerComponent, TeamPlayerComponent],

@@ -1,3 +1,3 @@
-# team-sorting-eidu
+﻿# Team Sorting ⚽
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/team-sorting-eidu)
+A simple angular app to organize two teams of football 

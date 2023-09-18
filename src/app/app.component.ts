@@ -14,7 +14,7 @@ import { TeamPlayerComponent } from './team-player-component/team-player.compone
 @Component({
   selector: 'app-component',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
   players = [
@@ -34,28 +34,8 @@ export class AppComponent {
   team1: string[] = [];
   team2: string[] = [];
 
-  @ViewChildren(TeamPlayerComponent)
-  teamPlayers!: QueryList<TeamPlayerComponent>;
-
   constructor() {
     this.reload(this.players);
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
   }
 
   getReserva(team: number) {
@@ -66,16 +46,6 @@ export class AppComponent {
   getField(team: number) {
     if (team == 1) return this.team1.slice(0, this.team1.length - 1);
     return this.team2.slice(0, this.team2.length - 1);
-  }
-
-  getTotalRating(team: number): number | undefined {
-    if (!this.teamPlayers) return;
-
-    let ratings = this.teamPlayers
-      .filter((player) => player.team == team)
-      .map((player) => player.rating);
-
-    return ratings.reduce((total, currentNumber) => total + currentNumber, 0);
   }
 
   randomSort(arr: string[]): string[] {
