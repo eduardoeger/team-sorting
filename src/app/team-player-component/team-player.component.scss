@@ -1,0 +1,21 @@
+.team-player-container {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.team-player-name {
+  width: 80px;
+}
+
+.rating-container {
+  width: 150px;
+}
+
+.rating-button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}

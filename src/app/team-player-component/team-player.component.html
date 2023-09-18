@@ -1,0 +1,14 @@
+<div class="team-player-container">
+  <span class="team-player-name">
+    {{ name }}
+  </span>
+  <div class="rating-container">
+    <mat-icon 
+      class="rating-button"
+      *ngFor="let ratingId of ratingArr; index as i"
+      [id]="'star_' + i"
+      (click)="rating = i + 1">
+      {{ showIcon(i) }}
+    </mat-icon>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<button mat-button (click)="reload(players)">
+  Recarregar<mat-icon>replay</mat-icon>
+</button>
+<button mat-button (click)="sort()">Sortear<mat-icon>refresh</mat-icon></button>
+
+<div class="row" id="printTarget">
+  <div cdkDropListGroup>
+    <div class="teams-container">
+      <div class="team-title">
+        <h2>Time 1</h2>
+        <mat-chip>
+          <mat-icon matChipAvatar>sports_soccer</mat-icon>
+          <span>{{ getTotalRating(1) }}</span>
+        </mat-chip>
+      </div>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="team1"
+        class="teams-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="teams-box" *ngFor="let item of team1" cdkDrag>
+          <app-team-player [name]="item" [team]="1"></app-team-player>
+        </div>
+      </div>
+    </div>
+
+    <div class="teams-container">
+      <div class="team-title">
+        <h2>Time 2</h2>
+        <mat-chip>
+          <mat-icon matChipAvatar>sports_soccer</mat-icon>
+          <span>{{ getTotalRating(2) }}</span>
+        </mat-chip>
+      </div>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="team2"
+        class="teams-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="teams-box" *ngFor="let item of team2" cdkDrag>
+          <app-team-player [name]="item" [team]="2"></app-team-player>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="row">
+      <div class="field-boundary-1">
+        <div
+          *ngFor="let item of getField(1)"
+          class="free-drag-box"
+          cdkDragBoundary=".field-boundary-1"
+          cdkDrag
+        >
+          <app-player [name]="item"></app-player>
+        </div>
+      </div>
+
+      <div class="free-drag-box">
+        <span [textContent]="getReserva(1)"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field-boundary-2">
+        <div
+          *ngFor="let item of getField(2)"
+          class="free-drag-box"
+          cdkDragBoundary=".field-boundary-2"
+          cdkDrag
+        >
+          <app-player [name]="item"></app-player>
+        </div>
+      </div>
+
+      <div class="free-drag-box">
+        <span [textContent]="getReserva(2)"></span>
+      </div>
+    </div>
+  </div>
+</div>
