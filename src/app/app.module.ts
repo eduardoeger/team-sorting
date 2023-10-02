@@ -9,9 +9,11 @@ import { PlayerComponent } from './player-component/player.component';
 import { TeamPlayerComponent } from './team-player-component/team-player.component';
 import { AppComponent } from './app.component';
 import { TeamListComponent } from './team-list/team-list.component';
+import { ChangePlayerComponent } from './change-player/change-player.component';
+import { SoccerFieldComponent } from './soccer-field/soccer-field.component';
 
 @NgModule({
-  declarations: [AppComponent, PlayerComponent, TeamPlayerComponent, TeamListComponent],
+  declarations: [AppComponent, PlayerComponent, TeamPlayerComponent, TeamListComponent, ChangePlayerComponent, SoccerFieldComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

@@ -1,15 +1,6 @@
-import {
-  Component,
-  ContentChildren,
-  QueryList,
-  ViewChildren,
-} from '@angular/core';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import { TeamPlayerComponent } from './team-player-component/team-player.component';
+import { Component, } from '@angular/core';
+import { PlayersService } from "../services/players.service";
+import { IPlayer } from "../abstractions/IPlayer";
 
 @Component({
   selector: 'app-component',
@@ -17,39 +8,24 @@ import { TeamPlayerComponent } from './team-player-component/team-player.compone
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  players = [
-    'José',
-    'Pucci',
-    'Tiago',
-    'Valdecir',
-    'Eidu',
-    'Leo',
-    'Eldrio',
-    'Gabriel DiCaprio',
-    'Rod',
-    'Renan Gostoso',
-    'Jorge',
-  ];
 
-  team1: string[] = [];
-  team2: string[] = [];
+  playersList: IPlayer[] = [];
 
-  constructor() {
-    this.reload(this.players);
+  team1: IPlayer[] = [];
+  team2: IPlayer[] = [];
+
+  constructor(private service: PlayersService) {
+    this.load(service.getPlayers());
   }
 
-  getReserva(team: number) {
-    if (team == 1) return this.team1[this.team1.length - 1];
-    return this.team2[this.team2.length - 1];
+  load(source: IPlayer[]) {
+    this.playersList = source;
+    this.team1 = source.filter(p => p.team == 1);
+    this.team2 = source.filter(p => p.team == 2);
   }
 
-  getField(team: number) {
-    if (team == 1) return this.team1.slice(0, this.team1.length - 1);
-    return this.team2.slice(0, this.team2.length - 1);
-  }
-
-  randomSort(arr: string[]): string[] {
-    const set = new Set<string>(arr);
+  randomSort(arr: IPlayer[]): IPlayer[] {
+    const set = new Set<IPlayer>(arr);
     const uniqueArr = Array.from(set);
     for (let i = uniqueArr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -58,13 +34,8 @@ export class AppComponent {
     return uniqueArr;
   }
 
-  reload(source: string[]) {
-    this.team1 = source.slice(0, this.players.length / 2);
-    this.team2 = source.slice(this.players.length / 2, this.players.length);
-  }
-
   sort() {
-    let sorted = this.randomSort(this.players);
-    this.reload(sorted);
+    let sorted = this.randomSort(this.playersList);
+    this.load(sorted);
   }
 }

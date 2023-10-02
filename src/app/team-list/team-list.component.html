@@ -1,9 +1,9 @@
 <div class="teams-container">
   <div class="team-title">
-    <h2>Time 1</h2>
+    <h2>Time {{team}}</h2>
     <mat-chip>
       <mat-icon matChipAvatar>sports_soccer</mat-icon>
-      <span>{{ getTotalRating(1) }}</span>
+      <span>{{ getTotalRating() }}</span>
     </mat-chip>
   </div>
   <div cdkDropList
@@ -11,7 +11,7 @@
        [cdkDropListData]="teamList"
        (cdkDropListDropped)="drop($event)">
     <div class="teams-box" *ngFor="let item of teamList" cdkDrag>
-      <app-team-player [name]="item" [team]="1"></app-team-player>
+      <app-team-player [player]="item"></app-team-player>
     </div>
   </div>
 </div>

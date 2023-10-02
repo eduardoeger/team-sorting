@@ -2,74 +2,36 @@
   <span class="header-menu-title">Team Sorting</span>
 
   <button mat-icon-button
-          matTooltip="Recarregar"
-          class="header-menu-item"
-          (click)="reload(players)">
-    <mat-icon>replay</mat-icon>
-  </button>
-  <button mat-icon-button
           class="header-menu-item"
           (click)="sort()"
           matTooltip="Sortear">
     <mat-icon>refresh</mat-icon>
   </button>
   <button mat-icon-button
-          matTooltip="Mostrar Jogadores"
+          matTooltip="Mostrar Campo"
           class="header-menu-item"
           (click)="drawer.toggle()">
     <mat-icon>person</mat-icon>
   </button>
 </div>
 
-<mat-drawer-container>
-  <mat-drawer [opened]="true" #drawer mode="side" position="start">
-    <div class="row" id="printTarget">
-      <div cdkDropListGroup>
-        <app-team-list [teamList]="team1"></app-team-list>
-        <app-team-list [teamList]="team2"></app-team-list>
-      </div>
-    </div>
-  </mat-drawer>
-  <mat-drawer-content>
-    <div class="fields-wrapper">
-      <h3>Posições</h3>
+<div class="view-content">
+  <mat-drawer-container>
 
-      <div class="row">
-        <div class="field-boundary-1">
-          <div
-                  *ngFor="let item of getField(1)"
-                  class="free-drag-box"
-                  cdkDragBoundary=".field-boundary-1"
-                  cdkDrag
-          >
-            <app-player [name]="item"></app-player>
-          </div>
-        </div>
+    <mat-drawer-content>
+      <div class="row" id="printTarget">
+        <app-change-player [playersList]="playersList"></app-change-player>
 
-        <div class="free-drag-box">
-          <span [textContent]="getReserva(1)"></span>
+        <div cdkDropListGroup>
+          <app-team-list [teamList]="team1" [team]="1"></app-team-list>
+          <app-team-list [teamList]="team2" [team]="2"></app-team-list>
         </div>
       </div>
+    </mat-drawer-content>
 
-      <div class="row">
-        <div class="field-boundary-2">
-          <div
-                  *ngFor="let item of getField(2)"
-                  class="free-drag-box"
-                  cdkDragBoundary=".field-boundary-2"
-                  cdkDrag
-          >
-            <app-player [name]="item"></app-player>
-          </div>
-        </div>
+    <mat-drawer [opened]="true" #drawer mode="side" position="end">
+      <app-soccer-field [team1]="team1" [team2]="team2"></app-soccer-field>
+    </mat-drawer>
 
-        <div class="free-drag-box">
-          <span [textContent]="getReserva(2)"></span>
-        </div>
-      </div>
-    </div>
-  </mat-drawer-content>
-</mat-drawer-container>
-
-
-
+  </mat-drawer-container>
+</div>

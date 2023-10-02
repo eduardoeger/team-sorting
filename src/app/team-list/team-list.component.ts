@@ -1,6 +1,7 @@
-import { Component, Input, QueryList, ViewChildren } from '@angular/core';
-import { TeamPlayerComponent } from "../team-player-component/team-player.component";
+import { Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { IPlayer } from "../../abstractions/IPlayer";
+import { PlayersService } from "../../services/players.service";
 
 @Component({
   selector: 'app-team-list',
@@ -9,12 +10,13 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/dr
 })
 export class TeamListComponent {
 
-  @Input() teamList: string[] = [];
+  @Input() teamList: IPlayer[] = [];
+  @Input() team: number = 1;
 
-  @ViewChildren(TeamPlayerComponent)
-  teamPlayers!: QueryList<TeamPlayerComponent>;
+  constructor(private service: PlayersService) {
+  }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<IPlayer[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -28,14 +30,15 @@ export class TeamListComponent {
         event.previousIndex,
         event.currentIndex
       );
+
+      let droppedItem = event.container.data[event.currentIndex];
+      droppedItem.team = this.team;
+      this.service.save(droppedItem);
     }
   }
 
-  getTotalRating(team: number): number | undefined {
-    if (!this.teamPlayers) return;
-
-    let ratings = this.teamPlayers
-      .filter((player) => player.team == team)
+  getTotalRating(): number | undefined {
+    let ratings = this.teamList
       .map((player) => player.rating);
 
     return ratings.reduce((total, currentNumber) => total + currentNumber, 0);

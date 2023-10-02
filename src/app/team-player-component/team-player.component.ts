@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IPlayer } from "../../abstractions/IPlayer";
 
 @Component({
   selector: 'app-team-player',
@@ -6,13 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./team-player.component.scss'],
 })
 export class TeamPlayerComponent {
-  @Input() name: string = '';
-  @Input() team: number = 1;
-
-  rating: number = 3;
-  ratingArr: number[] = [1, 2, 3, 4, 5];
-
-  showIcon(index: number) {
-    return this.rating >= index + 1 ? 'star' : 'minimize';
-  }
+  @Input() player: IPlayer | undefined;
 }

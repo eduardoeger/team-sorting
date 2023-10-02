@@ -1,0 +1,33 @@
+<div class="fields-wrapper">
+    <h2>Posições</h2>
+
+    <div class="row">
+        <div class="field-boundary-1">
+            <div *ngFor="let item of getField(1)"
+                 class="free-drag-box"
+                 cdkDragBoundary=".field-boundary-1"
+                 cdkDrag>
+                <app-player [name]="item.name"></app-player>
+            </div>
+        </div>
+
+        <div class="free-drag-box">
+            <span [textContent]="getReserva(1)"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="field-boundary-2">
+            <div *ngFor="let item of getField(2)"
+                 class="free-drag-box"
+                 cdkDragBoundary=".field-boundary-2"
+                 cdkDrag>
+                <app-player [name]="item.name"></app-player>
+            </div>
+        </div>
+
+        <div class="free-drag-box">
+            <span [textContent]="getReserva(2)"></span>
+        </div>
+    </div>
+</div>

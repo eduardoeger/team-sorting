@@ -1,0 +1,38 @@
+<div class="header">
+    <h2>Jogadores</h2>
+
+    <button mat-icon-button
+            matTooltip="Adicionar jogador"
+            class="add-button"
+            (click)="addPlayer()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<div class="player-input-list">
+    <div *ngFor="let player of playersList"
+         class="row player-input">
+        <mat-form-field subscriptSizing="dynamic">
+            <input matInput
+                   [(ngModel)]="player.name"
+                   [ngModelOptions]="{standalone: true}"
+                    (focusout)="service.save(player)">
+        </mat-form-field>
+
+        <div class="rating-container">
+            <mat-icon *ngFor="let _ of ratingArr; index as i"
+                      class="rating-button"
+                      [id]="'star_' + i"
+                      (click)="onRating(player, i + 1)">
+                {{ showIcon(i, player.rating) }}
+            </mat-icon>
+        </div>
+
+        <button mat-icon-button
+                matTooltip="Remover jogador"
+                class="remove-button"
+                (click)="removePlayer(player)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>

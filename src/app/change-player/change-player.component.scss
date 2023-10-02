@@ -1,0 +1,25 @@
+.player-input-list {
+  height: 100%;
+}
+
+.player-input {
+  width: 100%;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.rating-container {
+  width: 150px;
+}
+
+.rating-button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
